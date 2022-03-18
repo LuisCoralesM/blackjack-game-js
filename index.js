@@ -3,7 +3,7 @@
 
 // 2. Create a variable, sum, and set it to the sum of the two cards
 
-const cards = [5, 6];
+const cards = [];
 
 let hasBlackJack = false;
 let isAlive = false;
@@ -15,6 +15,8 @@ let cardsEl = document.getElementById("cards");
 let totalEl = document.getElementById("total");
 
 function startGame() {
+    isAlive = true;
+    cards.push(getRandomCard(), getRandomCard());
     renderGame();
 }
 
@@ -46,10 +48,22 @@ function renderGame() {
 }
 
 function getRandomCard() {
-    
+    let randomNum = Math.floor(Math.random() * 13) + 1;
+    if (randomNum > 10)
+    {
+        return 10;
+    } 
+    else if (randomNum === 1)
+    {
+        return 11;
+    }
+    else
+    {
+        return randomNum;
+    }
 }
 
 function newCard() {
-    cards.push(10)
+    cards.push(getRandomCard())
     renderGame();
 }
