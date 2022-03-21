@@ -3,20 +3,23 @@
 
 // 2. Create a variable, sum, and set it to the sum of the two cards
 
-const cards = [];
+let cards = [];
 
 let hasBlackJack = false;
 let isAlive = false;
 
 let message = "";
+let winlose = [0, 0];
 
 let messageEl = document.getElementById("message");
 let cardsEl = document.getElementById("cards");
 let totalEl = document.getElementById("total");
+let winloseEl = document.getElementById("winlose");
 
 function startGame() {
     isAlive = true;
-    cards.push(getRandomCard(), getRandomCard());
+    hasBlackJack = false;
+    cards = [getRandomCard(), getRandomCard()];
     renderGame();
 }
 
@@ -35,16 +38,19 @@ function renderGame() {
     } 
     else if (total === 21)
     {
+        winlose[0]++;
         message = "BLACKJACK!";
         hasBlackJack = true;
     } 
     else 
     {
+        winlose[1]++;
         message = "You lose!";
         isAlive = false;
     }
     
     messageEl.textContent = message;
+    winloseEl.textContent = winlose[0] + "/" + winlose[1];
 }
 
 function getRandomCard() {
@@ -64,6 +70,9 @@ function getRandomCard() {
 }
 
 function newCard() {
-    cards.push(getRandomCard())
-    renderGame();
+    if(isAlive === true && hasBlackJack === false)
+    {
+        cards.push(getRandomCard())
+        renderGame();
+    }
 }
